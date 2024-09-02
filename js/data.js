@@ -1,0 +1,23 @@
+const words = [
+    "apple", "grape", "mango", "peach", "berry", "olive", "onion", "melon", "plumb", "bonds",
+    "ocean", "river", "fjord", "bison", "camel", "zebra", "whale", "shark", "trout", "eagle",
+    "tiger", "panda", "koala", "llama", "hyena", "flame", "torch", "blaze", "gleam", "glint",
+    "shine", "spark", "gloss", "flash", "cloud", "rainy", "sunny", "windy", "pinch", "scuff",
+    "snowy", "foggy", "humid", "clear", "wheat", "corny", "grass", "hedge", "crawl", "slink",
+    "broom", "birch", "cedar", "oaken", "piano", "viola", "flute", "cello", "drums", "catch",
+    "harps", "glock", "organ", "table", "chair", "couch", "stool", "bench", "swish", "snare",
+    "spoon", "knife", "muggy", "plate", "glass", "brick", "mason", "tiles", "beams", "panel",
+    "paint", "brush", "spade", "shave", "sharp", "blunt", "edged", "dulls", "spiky", "latch",
+    "strip", "lined", "twist", "round", "match", "swift", "brisk", "quick", "speed", "chain",
+    "haste", "hurry", "rapid", "sweep", "scamp", "slide", "bound", "vault", "seize", "clasp",
+    "leaps", "grove", "truce", "quell", "peace", "tryst", "sleet", "drift", "gusty", "links", 
+    "blast", "whirl", "swirl", "crisp", "baked", "fried", "broil", "boils", "bends", "tilts",
+    "steak", "sauce", "spice", "herbs", "basil", "flour", "yeast", "knead", "blend", "churn",
+    "whisk", "grill", "saute", "stewy", "carve", "cheer", "laugh", "smile", "chuck", "grins",
+    "jolly", "glean", "shiny", "doubt", "valid", "false", "truth", "proof", "facts", "liege",
+    "loyal", "sworn", "fault", "vowel", "oaths", "proud", "brave", "noble", "grand", "stout",
+    "clomp", "march", "famed", "prays", "crowd", "glory", "honor", "pride", "valor", "award",
+    "tread", "tramp", "medal", "token", "relic", "crest", "knots", "ropes", "cords", "tapes",
+    "veins", "vines",
+];
+module.exports = words
