@@ -3,6 +3,7 @@
 //const words = require('./data.js');
 const win = "you win!";
 const maxAttempts = 5;
+const letter = document.createElement
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -16,8 +17,16 @@ let attemptCounter = 0;
 
 const resetButtonEl = document.querySelector('#reset');
 const messageEl = document.querySelector('#message');
+const squareEls = document.querySelectorAll('.sqr')
+const keyEls = document.querySelectorAll('.key')
+
 
 /*-------------------------------- Functions --------------------------------*/
+const init = () => {
+    attemptCounter = 0;
+    userWord = "";
+}
+
 const hiddenWord = "value";
 
 const checkWord = (userWord, hiddenWord) => {
@@ -26,22 +35,29 @@ const checkWord = (userWord, hiddenWord) => {
     if (userWord === hiddenWord) {
             messageEl.textContent = "You win!";
     }   else if (attemptCounter >= maxAttempts) {
-            messageEl.textContent = "you lose!";
+            messageEl.textContent = "You lose!";
     }   else {
-            messageEl.textContent = "try again!"
+            messageEl.textContent = "Try again!"
     }
 };
 
-const resetGame = () => {
-    attemptCounter = 0;
-}
+
 /*----------------------------- Event Listeners -----------------------------*/
 
-//resetButtonEl.addEventListener('click', function(Event){
-   // Init();
-//});
+keyEls.forEach((key) => {
+    key.addEventListener('click', (event) => {
+        const keyValue = event.target.innerText;
 
-//document.addEventListener('DOMContentLoaded', init);
+        console.log('key value:', keyValue);
+    });
+});
+
+resetButtonEl.addEventListener('click', function(event) {
+    init();
+});
+
+
+document.addEventListener('DOMContentLoaded', init);
 
 // refer to textContent 
 
@@ -49,5 +65,6 @@ const resetGame = () => {
 console.log(checkWord("valve", hiddenWord));
 console.log(checkWord("viola", hiddenWord));
 console.log(checkWord("verve", hiddenWord));
+console.log(checkWord("valet", hiddenWord));
 
 
