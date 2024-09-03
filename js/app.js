@@ -3,6 +3,7 @@
 //const words = require('./data.js');
 const win = "you win!";
 const maxAttempts = 5;
+
 /*---------------------------- Variables (state) ----------------------------*/
 
 let winner;
@@ -13,6 +14,8 @@ let attemptCounter = 0;
 
 /*------------------------ Cached Element References ------------------------*/
 
+const resetButtonEl = document.querySelector('#reset');
+const messageEl = document.querySelector('#message');
 
 /*-------------------------------- Functions --------------------------------*/
 const hiddenWord = "value";
@@ -21,11 +24,11 @@ const checkWord = (userWord, hiddenWord) => {
     attemptCounter++;
 
     if (userWord === hiddenWord) {
-            return "You win!";
+            messageEl.textContent = "You win!";
     }   else if (attemptCounter >= maxAttempts) {
-            return "you lose!";
+            messageEl.textContent = "you lose!";
     }   else {
-            return "try again!"
+            messageEl.textContent = "try again!"
     }
 };
 
@@ -34,13 +37,17 @@ const resetGame = () => {
 }
 /*----------------------------- Event Listeners -----------------------------*/
 
+//resetButtonEl.addEventListener('click', function(Event){
+   // Init();
+//});
+
 //document.addEventListener('DOMContentLoaded', init);
 
 // refer to textContent 
 
 
-console.log(checkWord("value", hiddenWord));
-console.log(checkWord("vines", hiddenWord));
-console.log(checkWord("veers", hiddenWord));
-console.log(checkWord("verts", hiddenWord));
-console.log(checkWord("vests", hiddenWord));
+console.log(checkWord("valve", hiddenWord));
+console.log(checkWord("viola", hiddenWord));
+console.log(checkWord("verve", hiddenWord));
+
+
