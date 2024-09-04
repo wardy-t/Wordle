@@ -1,17 +1,18 @@
 /*-------------------------------- Constants --------------------------------*/
 
 //const words = require('./data.js');
-const win = "you win!";
+
 const maxAttempts = 5;
-const hiddenWord = "value";
+const wordLength = 5;
 
 /*---------------------------- Variables (state) ----------------------------*/
 
 let winner;
 let wordleBoard;
-let userWord;
+let userWord = [];
 let attemptCounter = 0;
 let squareIndex = 0;
+let usedWords = [];
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -26,7 +27,36 @@ const keyEls = document.querySelectorAll('.key')
 const init = () => {
     attemptCounter = 0;
     userWord = "";
+    //hiddenWord = "";
 }
+
+
+const fetchHiddenWord = async () => {
+    try {
+        const response = await fetch('https://api.datamuse.com/words?sp=?????&max=1000'); // Fetch words with 5 letters
+        const data = await response.json();
+
+        if (data.length > 0) {
+            let randomWord;
+
+            do {
+                const randomIndex = Math.floor(Math.random() * data.length);
+                randomWord = data[randomIndex]?.word?.toUpperCase() || null;
+            } while (randomWord && usedWords.includes(randomWord));
+
+            if (randomWord) {
+                usedWords.push(randomWord);
+                return randomWord;
+            }
+        }
+
+    } catch (error) {
+        console.error('Error fetching word:', error);
+        return null;
+    }
+};
+
+//const submit = ()
 
 const checkWord = (userWord, hiddenWord) => {
     attemptCounter++;
@@ -34,7 +64,7 @@ const checkWord = (userWord, hiddenWord) => {
     if (userWord === hiddenWord) {
             messageEl.textContent = "You win!";
     }   else if (attemptCounter >= maxAttempts) {
-            messageEl.textContent = "You lose!";
+            messageEl.textContent = `You lose! The word was ${hiddenWord}`;
     }   else {
             messageEl.textContent = "Try again!"
     }
@@ -64,9 +94,38 @@ resetButtonEl.addEventListener('click', function(event) {
 
 document.addEventListener('DOMContentLoaded', init);
 
+document.addEventListener('DOMContentLoaded', async () => {
+    let hiddenWord = await fetchHiddenWord();
+    console.log('Hidden Word:', hiddenWord);
+})
+
+console.log("used words", usedWords)
 // refer to textContent 
 
 
 
 
 
+
+/*const fetchHiddenWord = async () => {
+    try {
+        const response = await fetch('https://api.datamuse.com/words?sp=?????&max=1000'); // Fetch words with 5 letters
+        const data = await response.json();
+
+        if (data.length > 0) {
+            let randomWord
+            do {
+                const randomIndex = Math.floor(Math.random() * data.length);
+                const randomWord = data[randomIndex]?.word;
+                return randomWord ? randomWord.toUpperCase() : null;
+            } while (usedWords.includes(randomWord));
+            usedWords.push(randomWord);
+            return randomWord;
+
+        }
+    } catch (error) {
+        console.error('Error fetching word:', error);
+        return null;
+    }
+};
+*/
