@@ -9,10 +9,12 @@ const wordLength = 5;
 
 let winner;
 let wordleBoard;
-let userWord = [];
+let userWord;
+let userWordArray = []
 let attemptCounter = 0;
 let squareIndex = 0;
 let usedWords = [];
+let row;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -24,10 +26,13 @@ const keyEls = document.querySelectorAll('.key')
 
 
 /*-------------------------------- Functions --------------------------------*/
-const init = () => {
+const init = async () => {
     attemptCounter = 0;
-    userWord = "";
-    //hiddenWord = "";
+    userWordArray = [];
+    squareIndex = 0;
+    hiddenWord = await fetchHiddenWord();
+    console.log('Hidden Word:', hiddenWord);
+    row = 0;
 }
 
 
@@ -72,14 +77,24 @@ const checkWord = (userWord, hiddenWord) => {
 
 const handleClick = (event) => {
     const keyValue = event.target.value;
+    
+    if (userWordArray.length < wordLength) {
+        if (squareIndex < squareEls.length) {
+            const square = squareEls[squareIndex];
+             square.textContent = keyValue;
+            userWordArray.push(keyValue);
+            squareIndex++;
+        }
+    }
 
-    if (squareIndex < squareEls.length) {
-        const square = squareEls[squareIndex];
-        square.textContent = keyValue;
-        squareIndex++;
+    if (userWordArray.length === wordLength) {
+        const userWord = userWordArray.join('');
+        checkWord(userWord, hiddenWord);
+        userWordArray = [];
+        squareIndex = row * wordLength;
+        row++
     }
 }
-
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -94,13 +109,10 @@ resetButtonEl.addEventListener('click', function(event) {
 
 document.addEventListener('DOMContentLoaded', init);
 
-document.addEventListener('DOMContentLoaded', async () => {
-    let hiddenWord = await fetchHiddenWord();
-    console.log('Hidden Word:', hiddenWord);
-})
 
+console.log("user word", userWord)
 console.log("used words", usedWords)
-// refer to textContent 
+
 
 
 
