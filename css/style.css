@@ -58,3 +58,32 @@ body {
     color: white;
     border-color: black;
 }
+
+#keyboard {
+    display: grid;
+    gap: 5px;
+    max-width: 800px;
+    align-items: center;
+    justify-content: center;
+}
+
+.row1 {
+    grid-template-columns: repeat(10, 1fr);
+    
+}
+
+.row2 {
+    grid-template-columns: repeat(9, 1fr);
+    
+}
+
+.row3 {
+    grid-template-columns: repeat(7, 1fr);
+   
+}
+
+.row4 {
+    grid-template-columns: repeat(2, 1fr);
+ 
+}
+

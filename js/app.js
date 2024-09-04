@@ -3,7 +3,7 @@
 //const words = require('./data.js');
 const win = "you win!";
 const maxAttempts = 5;
-const letter = document.createElement
+const hiddenWord = "value";
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -11,6 +11,7 @@ let winner;
 let wordleBoard;
 let userWord;
 let attemptCounter = 0;
+let squareIndex = 0;
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -27,8 +28,6 @@ const init = () => {
     userWord = "";
 }
 
-const hiddenWord = "value";
-
 const checkWord = (userWord, hiddenWord) => {
     attemptCounter++;
 
@@ -41,15 +40,21 @@ const checkWord = (userWord, hiddenWord) => {
     }
 };
 
+const handleClick = (event) => {
+    const keyValue = event.target.value;
+
+    if (squareIndex < squareEls.length) {
+        const square = squareEls[squareIndex];
+        square.textContent = keyValue;
+        squareIndex++;
+    }
+}
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 keyEls.forEach((key) => {
-    key.addEventListener('click', (event) => {
-        const keyValue = event.target.innerText;
-
-        console.log('key value:', keyValue);
-    });
+    key.addEventListener('click', handleClick)
 });
 
 resetButtonEl.addEventListener('click', function(event) {
@@ -62,9 +67,6 @@ document.addEventListener('DOMContentLoaded', init);
 // refer to textContent 
 
 
-console.log(checkWord("valve", hiddenWord));
-console.log(checkWord("viola", hiddenWord));
-console.log(checkWord("verve", hiddenWord));
-console.log(checkWord("valet", hiddenWord));
+
 
 
