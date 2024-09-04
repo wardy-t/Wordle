@@ -35,7 +35,13 @@ const init = async () => {
     hiddenWord = await fetchHiddenWord();
     console.log('Hidden Word:', hiddenWord);
     row = 0;
-}
+    messageEl.textContent = ""
+    
+    squareEls.forEach(square => {
+        square.textContent = '';
+        square.style.backgroundColor = '';
+    })
+};
 
 
 const fetchHiddenWord = async () => {
