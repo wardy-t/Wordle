@@ -5,6 +5,8 @@
 const maxAttempts = 5;
 const wordLength = 5;
 
+
+
 /*---------------------------- Variables (state) ----------------------------*/
 
 let winner;
@@ -75,26 +77,50 @@ const checkWord = (userWord, hiddenWord) => {
     }
 };
 
+
+
+const colorAssist = (userWord, hiddenWord) => {
+    const hiddenWordArray = hiddenWord.split('');
+    
+    userWord.split('').forEach((letter, index) => {
+        const squareIndex = row * wordLength + index;
+        const square = squareEls[squareIndex];
+
+        if (letter === hiddenWordArray[index]) {
+            square.style.backgroundColor = 'lime';
+        } else if (hiddenWordArray.includes(letter)) {
+            square.style.backgroundColor = 'orange';
+        } else {
+            square.style.backgroundColor = 'gray';
+        }
+    }
+)};
+
+
+
 const handleClick = (event) => {
     const keyValue = event.target.value;
     
     if (userWordArray.length < wordLength) {
         if (squareIndex < squareEls.length) {
             const square = squareEls[squareIndex];
-             square.textContent = keyValue;
+            square.textContent = keyValue;
             userWordArray.push(keyValue);
             squareIndex++;
         }
     }
 
-    if (userWordArray.length === wordLength) {
+    //DON'T FORGET TO BUILD YOUR BACKSPACE FUNCTION!!
+
+    else if (userWordArray.length === wordLength) {
         const userWord = userWordArray.join('');
         checkWord(userWord, hiddenWord);
+        colorAssist(userWord, hiddenWord);
         userWordArray = [];
         row++
         squareIndex = row * wordLength;
     }
-}
+};
 
 /*----------------------------- Event Listeners -----------------------------*/
 
