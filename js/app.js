@@ -1,6 +1,6 @@
 /*-------------------------------- Constants --------------------------------*/
 
-//const words = require('./data.js');
+//const words = require('./data.js')
 
 const maxAttempts = 5;
 const wordLength = 5;
@@ -28,11 +28,11 @@ const keyEls = document.querySelectorAll('.key')
 
 
 /*-------------------------------- Functions --------------------------------*/
-const init = async () => {
+const init = () => {
     attemptCounter = 0;
     userWordArray = [];
     squareIndex = 0;
-    hiddenWord = await fetchHiddenWord();
+    hiddenWord = fetchHiddenWord();
     console.log('Hidden Word:', hiddenWord);
     row = 0;
     messageEl.textContent = ""
@@ -44,30 +44,15 @@ const init = async () => {
 };
 
 
-const fetchHiddenWord = async () => {
-    try {
-        const response = await fetch('https://api.datamuse.com/words?sp=?????&max=1000'); // Fetch words with 5 letters
-        const data = await response.json();
-
-        if (data.length > 0) {
-            let randomWord;
-
-            do {
-                const randomIndex = Math.floor(Math.random() * data.length);
-                randomWord = data[randomIndex]?.word?.toUpperCase() || null;
-            } while (randomWord && usedWords.includes(randomWord));
-
-            if (randomWord) {
-                usedWords.push(randomWord);
-                return randomWord;
-            }
-        }
-
-    } catch (error) {
-        console.error('Error fetching word:', error);
-        return null;
-    }
-};
+const fetchHiddenWord = () => {
+    let randomWord;
+        do {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            randomWord = words[randomIndex].toUpperCase();
+        } while (usedWords.includes(randomWord));
+            usedWords.push(randomWord);
+            return randomWord;
+            };
 
 //const submit = ()
 
@@ -106,6 +91,15 @@ const colorAssist = (userWord, hiddenWord) => {
 
 const handleClick = (event) => {
     const keyValue = event.target.value;
+
+    if (keyValue === 'Backspace') {
+        if (userWordArray.length > 0) {
+            userWordArray.pop();
+            squareIndex--;
+            const square = squareEls[squareIndex];
+            square.textContent = '';
+        }
+    }
     
     if (userWordArray.length < wordLength) {
         if (squareIndex < squareEls.length) {
