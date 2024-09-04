@@ -91,8 +91,8 @@ const handleClick = (event) => {
         const userWord = userWordArray.join('');
         checkWord(userWord, hiddenWord);
         userWordArray = [];
-        squareIndex = row * wordLength;
         row++
+        squareIndex = row * wordLength;
     }
 }
 
