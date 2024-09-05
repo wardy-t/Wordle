@@ -1,3 +1,6 @@
+
+//BUGS: Backspace does not work
+
 /*-------------------------------- Constants --------------------------------*/
 
 //const words = require('./data.js')
@@ -28,6 +31,20 @@ const keyEls = document.querySelectorAll('.key')
 
 
 /*-------------------------------- Functions --------------------------------*/
+
+const render = () => {
+    userWordArray.forEach((letter, index) => {
+        const square = squareEls[row * wordLength + index];
+        square.textContent = letter;
+    });
+    
+    for (let i = userWordArray.length; i < wordLength; i++) {
+        const square = squareEls[row * wordLength + i];
+        square.textContent = '';
+    }
+
+};
+
 const init = () => {
     attemptCounter = 0;
     userWordArray = [];
@@ -35,12 +52,14 @@ const init = () => {
     hiddenWord = fetchHiddenWord();
     console.log('Hidden Word:', hiddenWord);
     row = 0;
-    messageEl.textContent = ""
+    //messageEl.textContent = "Welcome to Wordle!"
     
     squareEls.forEach(square => {
         square.textContent = '';
         square.style.backgroundColor = '';
-    })
+    });
+    
+    render();
 };
 
 
@@ -98,6 +117,7 @@ const handleClick = (event) => {
             squareIndex--;
             const square = squareEls[squareIndex];
             square.textContent = '';
+            render();
         }
     }
     
@@ -107,10 +127,9 @@ const handleClick = (event) => {
             square.textContent = keyValue;
             userWordArray.push(keyValue);
             squareIndex++;
+            render();
         }
     }
-
-    //DON'T FORGET TO BUILD YOUR BACKSPACE FUNCTION!!
 
     else if (userWordArray.length === wordLength) {
         const userWord = userWordArray.join('');
@@ -119,6 +138,7 @@ const handleClick = (event) => {
         userWordArray = [];
         row++
         squareIndex = row * wordLength;
+        render();
     }
 };
 
@@ -138,7 +158,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 console.log("user word", userWord)
 console.log("used words", usedWords)
-
+console.log("render", render)
 
 
 

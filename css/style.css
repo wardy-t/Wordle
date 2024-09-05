@@ -1,11 +1,26 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: white;
+}
+
+h1 {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 #wordle-board {
@@ -18,72 +33,48 @@ body {
 .sqr {
     width: 80px;
     height: 80px;
-    border: 4px solid, black;
+    border: 4px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    cursor: crosshair;
+    cursor: pointer; 
     background-color: white;
-}
-
-.sqr input {
-    width: 100%;
-    height: 100%;
-    font-size: 24px;
-    text-align: center;
-    border: none;
-    outline: none;
-    text-transform: uppercase;
-}
-
-.sqr.filled {
-    border-color: black;
-}
-
-.sqr.right {
-    background-color: lime;
-    color: white;
-    border-color: lime;
-}
-
-.sqr.close {
-    background-color: orangered;
-    color: white;
-    border-color: black;
-}
-
-.sqr.wrong {
-    background-color: gray;
-    color: white;
-    border-color: black;
 }
 
 #keyboard {
     display: grid;
-    gap: 5px;
+    gap: 5px; 
     max-width: 800px;
-    align-items: center;
+    margin: auto; 
     justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .row1 {
-    grid-template-columns: repeat(10, 1fr);
-    
+    grid-template-columns: repeat(10, 1fr); 
 }
 
 .row2 {
     grid-template-columns: repeat(9, 1fr);
-    
 }
 
 .row3 {
-    grid-template-columns: repeat(7, 1fr);
-   
+    grid-template-columns: repeat(7, 1fr); 
 }
 
 .row4 {
-    grid-template-columns: repeat(2, 1fr);
- 
+    grid-template-columns: repeat(2, 1fr); 
+}
+
+#reset {
+    
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto;
+    width: 200px auto;
 }
 
