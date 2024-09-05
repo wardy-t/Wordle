@@ -17,4 +17,6 @@ my Wordle with a fairly clean and structured look.
 
 The technologies used were JavaScript, HTML and CSS.
 
+I have a number of future enhancements that I plan to add to this game over time such as some limited use buttons that assist the user by revealing letters or removing keys on the keyboard, so watch this space.
+
 Enjoy the game!
