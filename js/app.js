@@ -1,26 +1,15 @@
-
-//BUGS: Backspace does not work
-
 /*-------------------------------- Constants --------------------------------*/
-
-//const words = require('./data.js')
 
 const maxAttempts = 5;
 const wordLength = 5;
 
-
-
 /*---------------------------- Variables (state) ----------------------------*/
 
-let winner;
-let wordleBoard;
 let userWord;
 let userWordArray = []
 let attemptCounter = 0;
 let squareIndex = 0;
-let usedWords = [];
 let row;
-
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -30,8 +19,6 @@ const squareEls = document.querySelectorAll('.sqr')
 const keyEls = document.querySelectorAll('.key')
 const deleteEl = document.querySelector('.delete')
 const enterEl = document.querySelector('.enter')
-
-
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -43,9 +30,7 @@ const render = () => {
     
     for (let i = userWordArray.length; i < wordLength; i++) {
         const square = squareEls[row * wordLength + i];
-        square.textContent = '';
     }
-
 };
 
 const init = () => {
@@ -53,30 +38,20 @@ const init = () => {
     userWordArray = [];
     squareIndex = 0;
     hiddenWord = fetchHiddenWord();
-    console.log('Hidden Word:', hiddenWord);
     row = 0;
-    //messageEl.textContent = "Welcome to Wordle!"
     
     squareEls.forEach(square => {
         square.textContent = '';
         square.style.backgroundColor = '';
     });
-    
+
     render();
 };
 
-
 const fetchHiddenWord = () => {
-    let randomWord;
-        do {
-            const randomIndex = Math.floor(Math.random() * words.length);
-            randomWord = words[randomIndex].toUpperCase();
-        } while (usedWords.includes(randomWord));
-            usedWords.push(randomWord);
-            return randomWord;
-            };
-
-//const submit = ()
+    const randomIndex = Math.floor(Math.random() * words.length);
+    return words[randomIndex].toUpperCase();
+}
 
 const checkWord = (userWord, hiddenWord) => {
     attemptCounter++;
@@ -86,11 +61,11 @@ const checkWord = (userWord, hiddenWord) => {
     }   else if (attemptCounter >= maxAttempts) {
             messageEl.textContent = `You lose! The word was ${hiddenWord}`;
     }   else {
-            messageEl.textContent = "Try again!"
+            messageEl.textContent = "Try again!";
     }
+
+    render();
 };
-
-
 
 const colorAssist = (userWord, hiddenWord) => {
     const hiddenWordArray = hiddenWord.split('');
@@ -109,8 +84,6 @@ const colorAssist = (userWord, hiddenWord) => {
     }
 )};
 
-
-
 const handleClick = (event) => {
     const keyValue = event.target.value;
     
@@ -124,15 +97,7 @@ const handleClick = (event) => {
         }
     }
 
-    else if (userWordArray.length === wordLength) {
-        const userWord = userWordArray.join('');
-        checkWord(userWord, hiddenWord);
-        colorAssist(userWord, hiddenWord);
-        userWordArray = [];
-        row++
-        squareIndex = row * wordLength;
-        render();
-    }
+
 };
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -143,6 +108,9 @@ keyEls.forEach((key) => {
 
 resetButtonEl.addEventListener('click', function(event) {
     init();
+    render();
+    messageEl.textContent = 'Welcome back!';
+
 });
 
 document.addEventListener('DOMContentLoaded', init);
@@ -171,32 +139,3 @@ enterEl.addEventListener('click', () => {
     render();
 });
 
-
-
-console.log(userWordArray);
-
-
-
-
-/*const fetchHiddenWord = async () => {
-    try {
-        const response = await fetch('https://api.datamuse.com/words?sp=?????&max=1000'); // Fetch words with 5 letters
-        const data = await response.json();
-
-        if (data.length > 0) {
-            let randomWord
-            do {
-                const randomIndex = Math.floor(Math.random() * data.length);
-                const randomWord = data[randomIndex]?.word;
-                return randomWord ? randomWord.toUpperCase() : null;
-            } while (usedWords.includes(randomWord));
-            usedWords.push(randomWord);
-            return randomWord;
-
-        }
-    } catch (error) {
-        console.error('Error fetching word:', error);
-        return null;
-    }
-};
-*/
