@@ -28,6 +28,9 @@ const resetButtonEl = document.querySelector('#reset');
 const messageEl = document.querySelector('#message');
 const squareEls = document.querySelectorAll('.sqr')
 const keyEls = document.querySelectorAll('.key')
+const deleteEl = document.querySelector('.delete')
+const enterEl = document.querySelector('.enter')
+
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -110,16 +113,6 @@ const colorAssist = (userWord, hiddenWord) => {
 
 const handleClick = (event) => {
     const keyValue = event.target.value;
-
-    if (keyValue === 'Backspace') {
-        if (userWordArray.length > 0) {
-            userWordArray.pop();
-            squareIndex--;
-            const square = squareEls[squareIndex];
-            square.textContent = '';
-            render();
-        }
-    }
     
     if (userWordArray.length < wordLength) {
         if (squareIndex < squareEls.length) {
@@ -152,15 +145,35 @@ resetButtonEl.addEventListener('click', function(event) {
     init();
 });
 
-
 document.addEventListener('DOMContentLoaded', init);
 
+deleteEl.addEventListener('click', () => {
+    if (userWordArray.length > 0) {
+        userWordArray.pop();
+        squareIndex--;
+        const square = squareEls[squareIndex];
+        square.textContent = '';
+        render();
+    }
+});
 
-console.log("user word", userWord)
-console.log("used words", usedWords)
-console.log("render", render)
+enterEl.addEventListener('click', () => {
+    if (userWordArray.length !== wordLength) {
+        return; 
+    }
+
+    const userWord = userWordArray.join('');
+    checkWord(userWord, hiddenWord);
+    colorAssist(userWord, hiddenWord);
+    userWordArray = [];
+    row++;
+    squareIndex = row * wordLength;
+    render();
+});
 
 
+
+console.log(userWordArray);
 
 
 
