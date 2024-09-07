@@ -10,6 +10,7 @@ let userWordArray = []
 let attemptCounter = 0;
 let squareIndex = 0;
 let row;
+let gameOver = false;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -39,6 +40,7 @@ const init = () => {
     squareIndex = 0;
     hiddenWord = fetchHiddenWord();
     row = 0;
+    gameOver = false;
     
     squareEls.forEach(square => {
         square.textContent = '';
@@ -51,19 +53,20 @@ const init = () => {
 const fetchHiddenWord = () => {
     const randomIndex = Math.floor(Math.random() * words.length);
     return words[randomIndex].toUpperCase();
-}
+};
 
 const checkWord = (userWord, hiddenWord) => {
     attemptCounter++;
 
     if (userWord === hiddenWord) {
-            messageEl.textContent = "You win!";
-    }   else if (attemptCounter >= maxAttempts) {
-            messageEl.textContent = `You lose! The word was ${hiddenWord}`;
-    }   else {
-            messageEl.textContent = "Try again!";
-    }
-
+        messageEl.textContent = "You win!";
+        gameOver = true;
+}   else if (attemptCounter >= maxAttempts) {
+        messageEl.textContent = `You lose! The word was ${hiddenWord}`;
+        gameOver = true;
+}   else {
+        messageEl.textContent = "Try again!"
+}
     render();
 };
 
@@ -85,6 +88,8 @@ const colorAssist = (userWord, hiddenWord) => {
 )};
 
 const handleClick = (event) => {
+    if (gameOver) return;
+
     const keyValue = event.target.value;
     
     if (userWordArray.length < wordLength) {
@@ -96,8 +101,6 @@ const handleClick = (event) => {
             render();
         }
     }
-
-
 };
 
 /*----------------------------- Event Listeners -----------------------------*/
