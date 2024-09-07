@@ -15,7 +15,7 @@ I built this game over five days between 2/9/24 and 6/9/24 in between full time 
 outlining my plan.
 
 I chose to build Wordle because I felt it put a lot of skills I had recently acquired to the test - specifically using multidimensional arrays, different loops, event listeners and query selectors in order to
-provide functions and solution that would solve some of the more complex logic problems behind the game, such as recognising and coloring individual letters within user guesses after comparing them to the hidden
+provide functions and solutions that would solve some of the more complex logic problems behind the game, such as recognising and coloring individual letters within user guesses after comparing them to the hidden
 word.
 
 The game also afforded me the chance to move away from Flexbox and use CSS Grid for the first time as well as building a HTML keyboard within the browser for my gamers to use. Both of these were fun and provided
