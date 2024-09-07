@@ -7,7 +7,7 @@ Link to planning work - https://github.com/wardy-t/Wordle-plan.git
 Welcome to my Wordle!
 
 Wordle is a game where you have five attempts to guess a hidden five letter word. Each time you guess a word the game will tell you if you have guessed any letters that are in the word (which are highlighted orange),
-or if you have guessed any letters which are in the word AND in the correct placement within the world (these are highlighted green). If you have guessed the hidden word correctly within five attempts you win!
+or if you have guessed any letters which are in the word AND in the correct placement within the word (these are highlighted green). If you have guessed the hidden word correctly within five attempts you win!
 
 It plays a lot easier than it reads :)
 
